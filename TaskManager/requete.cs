@@ -55,7 +55,7 @@ namespace TaskManager
         {
             taches task = (from t in bdd.taches1
                            where (t.label_tache == label)
-                           select t).First();
+                           select t).FirstOrDefault(); ;
             return task;
         }
 

@@ -132,7 +132,7 @@ namespace TaskManager
         private void saveTask_Click(object sender, RoutedEventArgs e)
         {
             try
-            { 
+            {
                 foreach (Container c in m_containers)
                 {
                     if (req.checkContainer(bdd, c.Name) == false)
@@ -147,7 +147,8 @@ namespace TaskManager
                             else
                                 parent_task = i.parent.Name;
                             taches t = new taches() { label_container = c.Name, label_tache = i.Title.Text, label_tache_parent = parent_task, commentaire = i.comment, date_debut = DateTime.Parse(i.dateBegin), date_fin = DateTime.Parse(i.dateEnd), effectuer = i.chkBox.IsChecked };
-                            if (req.checkTaches(bdd, i.Title.Text) != false)
+                           // taches b_t = req.getSTaches(bdd, i.Title.Text);
+                            if (req.checkTaches(bdd, t.label_tache) != false)
                                 req.modifTaches(bdd, t);
                             else
                                 req.ajoutTaches(bdd, t);
@@ -157,11 +158,8 @@ namespace TaskManager
                                 if (req.checkTaches(bdd, i1.Title.Text) != false)
                                     req.modifTaches(bdd, t1);
                                 else
-                                {
-                                    //MessageBox.Show("ajout Sous-tache: " + t1.label_tache);
-
                                     req.ajoutTaches(bdd, t1);
-                                }
+                                
                             }
                         }
                     }
@@ -172,7 +170,7 @@ namespace TaskManager
             {
                 MessageBox.Show("Une erreur est survenu lors de l'ajout d'une tâche : " + "Veuillez réessayer ultérieurement et redémarrer l'application", "Media Task Manager", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+}
 
         private void newTask_OnSaveNewTask(object sender, RoutedEventArgs e)
         {
@@ -561,6 +559,8 @@ namespace TaskManager
     {
         public CustomTreeViewItem(string title)
         {
+            bdd = new mediametrieEntities();
+            req = new requete();
             Title.Text = title;
             chkBox.Content = Title;
             Title.AddHandler(TextBlock.MouseDownEvent, new MouseButtonEventHandler(change_label));
@@ -591,6 +591,21 @@ namespace TaskManager
                 {
                     if (ev.Key == Key.Enter || ev.Key == Key.Escape)
                     {
+                        if (Title.Text != textBox.Text)
+                        {
+
+                            if (req.checkTaches(bdd, Title.Text) == true)
+                            {
+                                taches t = req.getSTaches(bdd, Title.Text);
+                                req.supTaches(bdd, t);
+                            }
+                            if (req.checkTaches(bdd, textBox.Text) == true)
+                            {
+                                MessageBox.Show("Déjà une tache avec ce nom");
+                                textBox.Text = Title.Text;
+                                return;
+                            }
+                        }
                         Title.Text = textBox.Text;
                         chkBox.Content = Title;
                         ev.Handled = true;
@@ -617,6 +632,8 @@ namespace TaskManager
             }
         }
 
+        private mediametrieEntities bdd;
+        private requete req;
         public CustomTreeViewItem parent;
         public CheckBox chkBox = new CheckBox();
         public TextBlock Title = new TextBlock();
