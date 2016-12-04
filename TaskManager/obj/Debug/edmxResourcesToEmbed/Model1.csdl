@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mediametrieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="container">
+    <Key>
+      <PropertyRef Name="label" />
+    </Key>
+    <Property Name="label" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="taches">
+    <Key>
+      <PropertyRef Name="label_tache" />
+    </Key>
+    <Property Name="label_tache" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="commentaire" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="date_debut" Type="DateTime" Precision="0" />
+    <Property Name="date_fin" Type="DateTime" Precision="0" />
+    <Property Name="label_container" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="label_tache_parent" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="effectuer" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="mediametrieEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="containers" EntityType="Self.container" />
+    <EntitySet Name="taches1" EntityType="mediametrieModel.taches" />
+  </EntityContainer>
+</Schema>

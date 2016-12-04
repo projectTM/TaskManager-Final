@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mediametrieModelStoreContainer" CdmEntityContainer="mediametrieEntities">
+    <EntitySetMapping Name="containers">
+      <EntityTypeMapping TypeName="mediametrieModel.container">
+        <MappingFragment StoreEntitySet="container">
+          <ScalarProperty Name="label" ColumnName="label" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="taches1">
+      <EntityTypeMapping TypeName="mediametrieModel.taches">
+        <MappingFragment StoreEntitySet="taches">
+          <ScalarProperty Name="label_tache" ColumnName="label_tache" />
+          <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+          <ScalarProperty Name="date_debut" ColumnName="date_debut" />
+          <ScalarProperty Name="date_fin" ColumnName="date_fin" />
+          <ScalarProperty Name="label_container" ColumnName="label_container" />
+          <ScalarProperty Name="label_tache_parent" ColumnName="label_tache_parent" />
+          <ScalarProperty Name="effectuer" ColumnName="effectuer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

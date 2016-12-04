@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mediametrieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="container">
+    <Key>
+      <PropertyRef Name="label" />
+    </Key>
+    <Property Name="label" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="taches">
+    <Key>
+      <PropertyRef Name="label_tache" />
+    </Key>
+    <Property Name="label_tache" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="commentaire" Type="varchar" MaxLength="1000" />
+    <Property Name="date_debut" Type="date" />
+    <Property Name="date_fin" Type="date" />
+    <Property Name="label_container" Type="varchar" MaxLength="100" />
+    <Property Name="label_tache_parent" Type="varchar" MaxLength="100" />
+    <Property Name="effectuer" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="mediametrieModelStoreContainer">
+    <EntitySet Name="container" EntityType="Self.container" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="taches" EntityType="Self.taches" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
